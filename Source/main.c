@@ -1,4 +1,4 @@
-/* USER LEDs Pin Connections
+/* LEDs
 0 : LED red     (PD14)
 1 : LED blue 	(PD15)
 2 : LED orange  (PD13)
@@ -7,10 +7,10 @@
 
 #include "stm32f4xx.h"
 
-// Number of User LEDs
+// Number of LEDs
 #define NUMBER_OF_LEDS 4
 
-/* Function prototypes */
+/* Functions */
 int main(void);
 void delay(uint32_t);
 void init_leds();
@@ -19,7 +19,7 @@ void turn_surname_on();
 void turn_name_off();
 void turn_surname_off();
 
-// Enum for the LEDs with their Pin Numbers
+// Enum for LEDs 
 enum leds{red = 14, blue = 15, orange = 13, green = 12};
 char firstName[4] = {'E','m','r','e'};
 char surName[6] = {'O','z','t','u','r','k'};
@@ -38,17 +38,17 @@ uint16_t numberOfBlinksSurname = 0;
 
 int main(void)
 {
-		// Enable the GPIOD port clock, set LED pins for output mode
+		// Enable the GPIOD port clock and  LED pins  output 
 		init_leds();
 
-		// Perform the LED blinks for first name
+		// turn on the LED first name
 		turn_name_on();
 		delay(delayFactor);
-		// Turn off the LED for first name
+		// Turn off the LED  first name
 		turn_name_off();
 		delay(delayFactor);
 
-		// Perform the LED blinks for surname
+		// turn on the LED blinks surname
 		turn_surname_on();
 		delay(delayFactor);
 		// Turn off the LED for surname
@@ -60,7 +60,7 @@ void init_leds()
 	// Enable the clock of port D of the GPIO
 	RCC->AHB1ENR |= RCC_AHB1ENR_GPIODEN;
 
-	// Set LED pins in General Purpose Output Mode
+	// Set LED pins in G P O Mode
 	GPIOD->MODER &= 0x00000000;
 	GPIOD->MODER |= (0x01 << 2*12 | 0x01 << 2*13 | 0x01 << 2*14 | 0x01 << 2*15);
 
@@ -71,12 +71,12 @@ void init_leds()
 
 void turn_name_on()
 {
-	// Stores the number of LED blinks occurred
+	// Stores the number of LED blinks 
 	uint8_t blinkCounter = 0;
 	// Number of blinks required for first name
 	numberOfBlinksName = sizeof(firstName);
 
-	// Calculates the ASCII sum of first name characters
+	// Calculating the ASCII sum of first name letters
 	for(uint16_t i = 0; i < sizeof(firstName); i++)
 		ledSelectFirstName += firstName[i];
 
@@ -92,7 +92,7 @@ void turn_name_on()
 	else if(ledSelectFirstName == 3)
 		ledPin = green;
 
-	// Perform LED blinks
+	// turn on LED blinks
 	while(1)
 	{
 	    // Set ledPin High
