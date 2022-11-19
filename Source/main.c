@@ -25,15 +25,15 @@ char firstName[4] = {'E','m','r','e'};
 char surName[6] = {'O','z','t','u','r','k'};
 uint32_t delayFactor = 10000000;
 
-// Stores the LED pin number to be used
+
 static uint32_t ledPin = 0;
-// LED selection (0,1,2,3) for first name
+
 uint32_t ledSelectFirstName = 0;
-// LED selection (0,1,2,3) for surname
+
 uint32_t ledSelectSurname = 0;
-// Stores required number of blinks for First Name
+
 uint16_t numberOfBlinksName = 0;
-// Stores required number of blinks for Surname
+
 uint16_t numberOfBlinksSurname = 0;
 
 int main(void)
